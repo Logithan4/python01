@@ -1,0 +1,26 @@
+name: Python Testing
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8  # You can change this to your desired Python version
+
+    - name: Install Dependencies
+      run: pip install -r requirements.txt  # Modify if you have a requirements file
+
+    - name: Run Tests
+      run: python -m unittest discover -v
+
