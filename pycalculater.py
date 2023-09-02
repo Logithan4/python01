@@ -1,18 +1,9 @@
-# math_operations.py
 
-def add_numbers(num1, num2):
-    """
-    Add two numbers and return the result.
+def test_addition():
+    assert add(2, 3) == 5
 
-    Args:
-        num1 (float or int): The first number.
-        num2 (float or int): The second number.
+def test_negative_numbers():
+    assert add(-2, 3) == 1
 
-    Returns:
-        float or int: The sum of num1 and num2.
-    """
-    return num1 + num2
-
-# Example usage:
-# result = add_numbers(5, 3)
-# print(result)  # Output will be 8
+def test_decimal_numbers():
+    assert add(1.5, 2.5) == 4.0

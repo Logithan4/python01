@@ -1,25 +1,33 @@
-name: Python Testing
+name: Python CI yml
 
 on:
   push:
     branches:
-      - main  # Change this to your default branch
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.8  # You can change this to your desired Python version
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
 
-    - name: Install Dependencies
-      run: pip install -r requirements.txt  # Modify if you have a requirements file
+      - name: Install dependencies
+        run: pip install -r requirements.txt
 
-    - name: Run Tests
-      run: python -m unittest discover -v
+      - name: Run tests and generate results
+        run: |
+          cd pycalculator  # Change to the project's root directory
+          pytest --junitxml=test_results/report.xml tests/
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results
+          path: pycalculator/test_results/
